@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Pyro Scroll</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Auth Container -->
+    <div id="authContainer" class="auth-overlay">
+        <div class="auth-card">
+            <div class="pyro-logo">
+                <div class="flame-icon">🔥</div>
+                <h1>Pyro Scroll</h1>
+                <p>Infinite. Burning. Content.</p>
+            </div>
+            <button id="googleSignInBtn" class="google-signin-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                Sign in with Google
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Feed Container -->
+    <div id="feedContainer" class="feed-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title">Pyro Scroll</h1>
+            <button id="postBtn" class="post-btn" title="Post a video">
+                <span>+</span>
+            </button>
+            <button id="profileBtn" class="profile-btn" title="Profile">
+                <img id="userAvatar" src="" alt="Profile">
+            </button>
+        </header>
+
+        <!-- Video Feed -->
+        <div id="videoFeed" class="video-feed">
+            <!-- Videos will be dynamically inserted here -->
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="loadingIndicator" class="loading-spinner hidden">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div id="postModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Share a Video</h2>
+                <button id="closeModalBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <form id="postForm" class="post-form">
+                <div class="form-group">
+                    <label>Video URL</label>
+                    <input type="url" id="videoUrl" placeholder="https://example.com/video.mp4" required>
+                    <small>Paste your video URL here</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Caption</label>
+                    <textarea id="caption" placeholder="What's burning? 🔥" maxlength="500"></textarea>
+                    <small id="charCount">0/500</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Tags</label>
+                    <input type="text" id="tags" placeholder="e.g. fire, trending, cool (comma separated)">
+                    <div id="tagsList" class="tags-list"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Thumbnail URL (optional)</label>
+                    <input type="url" id="thumbnail" placeholder="https://example.com/thumb.jpg">
+                </div>
+
+                <button type="submit" class="submit-btn">Post to Pyro Scroll</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal hidden">
+        <div class="modal-content profile-modal-content">
+            <div class="modal-header">
+                <h2>Profile</h2>
+                <button id="closeProfileBtn" class="close-btn">&times;</button>
+            </div>
+            
+            <div class="profile-info">
+                <img id="profileAvatar" src="" alt="Profile" class="profile-avatar">
+                <h3 id="profileName"></h3>
+                <p id="profileEmail"></p>
+                <div class="profile-stats">
+                    <div class="stat">
+                        <strong id="postsCount">0</strong>
+                        <span>Posts</span>
+                    </div>
+                    <div class="stat">
+                        <strong id="viewsCount">0</strong>
+                        <span>Views</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="userPosts" class="user-posts">
+                <!-- User's posts will appear here -->
+            </div>
+
+            <button id="signOutBtn" class="sign-out-btn">Sign Out 🚪</button>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="modal hidden">
+        <div class="video-modal-content">
+            <button id="closeVideoBtn" class="close-btn video-close">&times;</button>
+            <video id="modalVideo" controls>
+                <source src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <!-- App Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
